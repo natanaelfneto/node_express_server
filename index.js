@@ -29,16 +29,30 @@ https://console.developers.google.com
 passport.use(
 
     // set google keys and callback url
-    new GoogleStrategy({
-        ClientID: keys.GoogleClientID,
-        ClientSecrect: keys.GoogleClientSecret,
-        callbackURL: '/auth/google/callback'
-    },
-    
-    // 
-    (accessToken) => {
-        console.log(accessToken)
+    new GoogleStrategy(
+        {
+            clientID: keys.GOOGLE_CLIENT_ID,
+            clientSecrect: keys.GOOGLE_CLIENT_SECRET,
+            callbackURL: '/auth/google/callback'
+        },
+
+        // 
+        (accessToken) => {
+            console.log(accessToken)
+        }
+    )
+);
+
+app.get(
+    '/auth/google', 
+    passport.authenticate('google', {
+        scope: ['profile', 'email']
     })
+);
+
+app.get(
+    '/auth/google/callback', 
+    passport.authenticate('google')
 );
 
 // check if there is an environment process value for port
