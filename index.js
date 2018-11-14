@@ -38,7 +38,7 @@ app.use(passport.session());
 require('./routes')(app);
 
 // check if there is an environment process value for port
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || settings.PORT;
 
 // set server to listen a port
 app.listen(PORT);

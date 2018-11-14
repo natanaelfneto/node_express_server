@@ -3,7 +3,6 @@ if (process.env.NODE_ENV == "production") {
         cookieKey: COOKIE_KEY,
         googleClientID: process.env.GOOGLE_CLIENT_ID,
         googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        googleCallbackURL: '/auth/google/callback',
         mongoURI: process.env.MONGO_URI
     };
 }
