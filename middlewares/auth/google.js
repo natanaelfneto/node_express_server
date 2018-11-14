@@ -45,6 +45,7 @@ passport.use(
             clientID: settings.KEYS.googleClientID,
             clientSecret: settings.KEYS.googleClientSecret,
             callbackURL: '/auth/google/callback',
+            proxy: true
         },
 
         // arrow function handler response data
