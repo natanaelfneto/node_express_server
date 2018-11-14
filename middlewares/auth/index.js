@@ -1,1 +1,1 @@
-require('./google');
+module.exports = require('./google');
