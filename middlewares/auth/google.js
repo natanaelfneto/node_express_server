@@ -1,27 +1,31 @@
-//project keys
+// project keys
 const settings = require('../../settings');
 
 /*
-passport import
-handles oauth authentication strategies
+* passport import
+* handles oauth authentication strategies
 */
 const passport = require('passport');
 
 /*
-google oauth 2.0 strategy import
-specific strategy for google oauth authentication
+* google oauth 2.0 strategy import
+* specific strategy for google oauth authentication
 */
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-// get user model
-// should be change to function for psql, sqlite, mongo, etc...
+/*
+* get user model
+* should be change to function for psql, sqlite, mongo, etc...
+*/ 
 const mongoose = require('mongoose');
 const User = mongoose.model('user');
 
+// google user serializer
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
+// google user deserializer
 passport.deserializeUser((id, done) => {
     User.findById(id)
     .then(user => {
@@ -30,33 +34,29 @@ passport.deserializeUser((id, done) => {
 });
 
 /*
-use the google authentication strategy within passport
-https://console.developers.google.com
+* use the google authentication strategy within passport
+* https://console.developers.google.com
 */
 passport.use(
     new GoogleStrategy(
 
         // paramenters for google strategy
         {
-        clientID: settings.keys.googleClientID,
-        clientSecret: settings.keys.googleClientSecret,
-        callbackURL: settings.keys.googleCallbackURL
+            clientID: settings.keys.googleClientID,
+            clientSecret: settings.keys.googleClientSecret,
+            callbackURL: '/auth/google/callback',
         },
 
         // arrow function handler response data
         (accessToken, refreshToken, profile, done) => {
-
             // check if user already exist
             User.findOne({ googleID: profile.id })
-                
             // promisse handler
             .then(user => {
-
                 // if user exist
                 if (user) {
                     done(null, user);
                 }
-
                 // if user does not exist
                 else {
                     new User({ googleID: profile.id })

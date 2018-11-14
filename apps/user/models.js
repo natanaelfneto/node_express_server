@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 /*
-User Schema to manage user instances
+* User Schema to manage user instances
 */
 const userSchema = new Schema({
     googleID: String

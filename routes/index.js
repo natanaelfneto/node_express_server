@@ -1,13 +1,15 @@
 /*
-passport import
-handles oauth authentication strategies
+* passport import
+* handles oauth authentication strategies
 */
 const passport = require('passport');
 
 /*
-exporting routes
+* exporting routes
 */
 module.exports = (app) => {
+
+    //
     app.get(
         '/auth/google',
         passport.authenticate('google', {
@@ -15,13 +17,16 @@ module.exports = (app) => {
         })
     );
 
+    //
     app.get('/auth/google/callback', passport.authenticate('google'));
 
+    //
     app.get('/api/logout', (req, res) => {
         req.logout();
         res.send('logged out');
     });
 
+    //
     app.get('/api/user/logged', (req, res) => {
         res.send(req.user);
     })

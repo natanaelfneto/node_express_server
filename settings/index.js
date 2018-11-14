@@ -1,15 +1,17 @@
 /*
-mongoose import
-make it easy to work with mongodb
+* mongoose import
+* make it easy to work with mongodb
 */
 const mongoose = require('mongoose');
 
 // get project keys
-const keys = require('./keys');
+const KEYS = require('./keys');
+const MAX_AGE = 30 * 24 * 60 * 60 * 1000;
 
-//set mongodb database url
-mongoose.connect(keys.mongoURI);
+// set mongodb database url
+mongoose.connect(KEYS.mongoURI);
 
 module.exports = {
-    keys
+    KEYS,
+    MAX_AGE
 }
