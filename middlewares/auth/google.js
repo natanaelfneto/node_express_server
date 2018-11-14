@@ -42,8 +42,8 @@ passport.use(
 
         // paramenters for google strategy
         {
-            clientID: settings.keys.googleClientID,
-            clientSecret: settings.keys.googleClientSecret,
+            clientID: settings.KEYS.googleClientID,
+            clientSecret: settings.KEYS.googleClientSecret,
             callbackURL: '/auth/google/callback',
         },
 
